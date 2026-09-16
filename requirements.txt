@@ -1,0 +1,15 @@
+# Nucleo: analisis morfometrico y campos potenciales. Sin red.
+numpy==2.4.4
+scipy==1.17.1
+scikit-image==0.26.0
+pytest==8.*
+
+# Geoespacial: descarga y reproyeccion de teselas.
+rasterio
+pyproj
+requests
+
+# Solo para la ruta via Google Earth Engine (opcional).
+earthengine-api
+
+# En Colab ya vienen preinstalados: pandas, matplotlib.

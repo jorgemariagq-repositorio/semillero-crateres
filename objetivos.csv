@@ -1,0 +1,14 @@
+# Catálogo de objetivos.
+# La columna `verificado` indica si las cifras se contrastaron contra la
+# fuente primaria. Ninguna cifra con `verificado = no` puede entrar al informe.
+nombre,lon,lat,diametro_km,morfologia,entorno,papel,verificado,fuente
+Meteor Crater,-111.0233,35.0281,1.186,simple,desierto,prueba de ingenieria,si,Wikipedia/USGS
+Serra da Cangalha,-46.87,-8.08,13.7,compleja,cerrado,compuerta,si,Kenkmann et al. 2011
+Araguainha,-52.99,-16.79,40.0,compleja,cerrado,positivo,no,
+Riachao,-46.65,-7.72,4.5,compleja,cerrado-caatinga,positivo,no,
+Vargeao,-52.17,-26.82,12.0,compleja,agricola,positivo,no,
+Vista Alegre,-52.70,-25.95,9.5,compleja,agricola,positivo,no,
+Santa Marta,-45.24,-10.17,10.0,compleja,caatinga,positivo,no,
+Cerro Jarau,-56.53,-30.20,13.5,compleja,pampa,positivo,no,
+Colonia,-46.71,-23.87,3.6,simple,periurbano,positivo,no,
+Estructura del Vichada,-69.25,4.50,50.0,desconocida,sabana,caso de estudio,no,

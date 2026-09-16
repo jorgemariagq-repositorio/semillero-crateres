@@ -1,0 +1,25 @@
+# Datos: NO van al repositorio.
+# FABDEM esta bajo CC BY-NC-SA 4.0 y no se puede redistribuir libremente.
+# Ademas las teselas pesan MB y GitHub no es un repositorio de datos.
+*.tif
+*.tiff
+*.zip
+*.gdf
+tiles/
+fabdem/
+
+# Resultados regenerables
+*.png
+*.csv
+!objetivos.csv
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Sistema
+.DS_Store
+.ipynb_checkpoints/
