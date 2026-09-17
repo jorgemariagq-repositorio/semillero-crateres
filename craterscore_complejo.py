@@ -36,8 +36,7 @@ from craterscore import (basin_circularity, crater_profile,
                          sublevel_basin_mask)
 
 __all__ = ["perfil_complejo", "ajustar_perfil_complejo", "contraste_foso",
-           "metricas_complejas", "crater_complejo_sintetico",
-           "refinar_centro"]
+           "metricas_complejas", "crater_complejo_sintetico"]
 
 _EPS = 1e-9
 
@@ -213,49 +212,3 @@ def metricas_complejas(dem, cx=None, cy=None, r_max=None, n_az=36,
         "tipo": "complejo" if dh_peak > 2.0 * max(dh_rim, _EPS) else "simple",
         "edge_limited": bool(r_rim > 0.8 * r_max),
     }
-
-
-def refinar_centro(dem, r_rim_px, cx=None, cy=None, busqueda_px=None,
-                   pasos=9, iteraciones=3, n_az=36):
-    """Busca el centro que maximiza la coherencia azimutal.
-
-    POR QUE HACE FALTA
-    Las coordenadas de catalogo suelen venir con dos decimales de grado, o sea
-    +-1,1 km. Sobre una estructura de 13,7 km eso es un 16% del radio, y basta
-    para emborronar el perfil radial medio.
-
-    Comprobado sobre sinteticos: un desplazamiento de 1,5 km baja la coherencia
-    de 0,90 a 0,47 y hace que el ajuste del radio se pegue al limite inferior
-    de la tolerancia, con un error aparente del 25%.
-
-    Busqueda en rejilla de grueso a fino. `busqueda_px` por defecto es 0,25
-    veces el radio del borde.
-
-    Devuelve (cx, cy, coherencia). Si no mejora, devuelve el centro de partida.
-    """
-    dem = np.asarray(dem, dtype=float)
-    ny, nx = dem.shape
-    cx = (nx - 1) / 2.0 if cx is None else float(cx)
-    cy = (ny - 1) / 2.0 if cy is None else float(cy)
-    busqueda = 0.25 * r_rim_px if busqueda_px is None else float(busqueda_px)
-    r_max = 0.45 * min(nx, ny)
-
-    work, _ = detrend_plane(dem)
-
-    def coherencia_en(x, y):
-        r, prof = radial_profiles(work, x, y, r_max, n_az=n_az)
-        return azimuthal_coherence(r, prof, r_rim_px)
-
-    mejor = (cx, cy, coherencia_en(cx, cy))
-    for _ in range(iteraciones):
-        desplazamientos = np.linspace(-busqueda, busqueda, pasos)
-        for dx in desplazamientos:
-            for dy in desplazamientos:
-                x, y = mejor[0] + dx, mejor[1] + dy
-                if not (0.2 * nx < x < 0.8 * nx and 0.2 * ny < y < 0.8 * ny):
-                    continue
-                c = coherencia_en(x, y)
-                if c > mejor[2]:
-                    mejor = (x, y, c)
-        busqueda /= (pasos - 1) / 2.0
-    return mejor

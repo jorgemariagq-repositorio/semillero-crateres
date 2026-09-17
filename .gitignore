@@ -7,11 +7,22 @@
 *.gdf
 tiles/
 fabdem/
+fabdem_cache/
+negativos/
 
 # Resultados regenerables
 *.png
 *.csv
 !objetivos.csv
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.toc
+*.synctex.gz
 
 # Python
 __pycache__/
